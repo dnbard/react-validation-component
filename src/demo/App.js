@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import logo from './logo.svg';
 import './App.css';
 
-import ReactValidation from '../lib//validation.jsx';
+import ReactValidation from '../lib/validation.jsx';
 
 const myPropTypes = { name: PropTypes.number.isRequired };
 const obj = { name: 'Alex' };

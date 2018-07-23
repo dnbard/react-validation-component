@@ -22,9 +22,18 @@ export default class ReactValidation extends Component{
         const errors = [];
         
         for(let prop in propTypes){
-            const e = propTypes[prop](children, prop, title || DEFAULT_NAME, '', null, ReactPropTypesSecret);
-            if(e){
-                errors.push({ error: e, property: prop });
+            const propHandler = propTypes[prop];
+            const propHandlers = typeof propHandler === 'function' ? [ propHandler ] : propHandler;
+
+            if (!Array.isArray(propHandlers)){
+                throw new TypeError("propHandlers should be an array");
+            }
+
+            for(let i in propHandlers){
+                const e = propHandlers[i](children, prop, title || DEFAULT_NAME, '', null, ReactPropTypesSecret);
+                if(e){
+                    errors.push({ error: e, property: prop });
+                }
             }
         }
         
