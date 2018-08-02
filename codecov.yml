@@ -1,5 +1,5 @@
 ignore:
-  - "*.spec.js"
+  - "tests/*.spec.js"
 parsers:
   javascript:
     enable_partials: yes

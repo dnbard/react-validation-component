@@ -1,4 +1,9 @@
 export default class AnyValidator{
+    constructor(){
+        // alliases
+        this.equals = this.equal = this.only = this.valid = this.allow;
+    }
+
     _base(func){
         if (typeof func !== 'function'){
             throw new TypeError(`First argument should be a function instead of ${typeof func}`);

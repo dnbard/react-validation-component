@@ -42,22 +42,24 @@ describe('Validators :: Any', () => {
         });
     });
 
-    describe('#allow', () => {
-        it('should validate', () => {
-            expect(any.allow(1)({ a: 1 }, 'a')).to.be.equal(undefined);
-        });
-
-        it('should validate for several arguments', () => {
-            expect(any.allow(1, 2)({ a: 2 }, 'a')).to.be.equal(undefined);
-        });
-
-        it('should validate for array of arguments', () => {
-            expect(any.allow([1, 2])({ a: 2 }, 'a')).to.be.equal(undefined);
-        });
-
-        it('should invalidate', () => {
-            expect(any.allow(1)({ a: 2 }, 'a')).to.be.an('error');
-            expect(any.allow(1)({ a: 1 }, 'b')).to.be.an('error');
-        });
+    [ 'allow', 'valid', 'only', 'equal', 'equals' ].forEach(propName => {
+        describe('#' + propName, () => {
+            it('should validate', () => {
+                expect(any[propName](1)({ a: 1 }, 'a')).to.be.equal(undefined);
+            });
+    
+            it('should validate for several arguments', () => {
+                expect(any[propName](1, 2)({ a: 2 }, 'a')).to.be.equal(undefined);
+            });
+    
+            it('should validate for array of arguments', () => {
+                expect(any[propName]([1, 2])({ a: 2 }, 'a')).to.be.equal(undefined);
+            });
+    
+            it('should invalidate', () => {
+                expect(any[propName](1)({ a: 2 }, 'a')).to.be.an('error');
+                expect(any[propName](1)({ a: 1 }, 'b')).to.be.an('error');
+            });
+        }); 
     });
 });
