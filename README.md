@@ -5,6 +5,8 @@
 
 **React Validation Component** is an utility component that solves data validation problem with the help of "native" React tool - `prop-types`.
 
+Note: This **library is in development** and `API are going to be changed in the future`!
+
 # Basic Example
 
 Just show me the code!
