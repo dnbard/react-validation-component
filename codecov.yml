@@ -1,2 +1,5 @@
 ignore:
   - "*.spec.js"
+parsers:
+  javascript:
+    enable_partials: yes
