@@ -41,61 +41,73 @@ describe('Validators :: Any', () => {
         });
     });
 
-    [ 'allow', 'valid', 'only', 'equal', 'equals' ].forEach(propName => {
-        describe('#' + propName, () => {
-            it('should validate', () => {
-                expect(any[propName](1)({ a: 1 }, 'a')).to.be.equal(undefined);
-            });
-    
-            it('should validate for several arguments', () => {
-                expect(any[propName](1, 2)({ a: 2 }, 'a')).to.be.equal(undefined);
-            });
-    
-            it('should validate for array of arguments', () => {
-                expect(any[propName]([1, 2])({ a: 2 }, 'a')).to.be.equal(undefined);
-            });
-    
-            it('should invalidate', () => {
-                expect(any[propName](1)({ a: 2 }, 'a')).to.be.an('error');
-                expect(any[propName](1)({ a: 1 }, 'b')).to.be.an('error');
-            });
-        }); 
-    });
+    describe('#allow', () => {
+        it('should validate', () => {
+            expect(any.allow(1)({ a: 1 }, 'a')).to.be.equal(undefined);
+        });
 
-    [ 'disallow', 'not', 'invalid' ].forEach(propName => {
-        describe('#' + propName, () => {
-            it('should validate', () => {
-                expect(any[propName](1)({ a: 2 }, 'a')).to.be.equal(undefined);
-                expect(any[propName](1)({ a: 1 }, 'b')).to.be.equal(undefined);
-            });
+        it('should validate for several arguments', () => {
+            expect(any.allow(1, 2)({ a: 2 }, 'a')).to.be.equal(undefined);
+        });
 
-            it('should validate for several arguments', () => {
-                expect(any[propName](1, 2)({ a: 3 }, 'a')).to.be.equal(undefined);
-            });
-    
-            it('should validate for array of arguments', () => {
-                expect(any[propName]([1, 2])({ a: 3 }, 'a')).to.be.equal(undefined);
-            });
+        it('should validate for array of arguments', () => {
+            expect(any.allow([1, 2])({ a: 2 }, 'a')).to.be.equal(undefined);
+        });
 
-            it('should invalidate', () => {
-                expect(any[propName](1)({ a: 1 }, 'a')).to.be.an('error');
-            });
+        it('should invalidate', () => {
+            expect(any.allow(1)({ a: 2 }, 'a')).to.be.an('error');
+            expect(any.allow(1)({ a: 1 }, 'b')).to.be.an('error');
+        });
 
-            it('should invalidate for 2+ arguments', () => {
-                expect(any[propName]([ 1, 2 ])({ a: 2 }, 'a')).to.be.an('error');
+        it('should have alliases', () => {
+            [ 'valid', 'only', 'equal', 'equals' ].forEach(propName => {
+                expect(any[propName]).to.be.equal(any.allow);
             });
         });
     });
 
-    [ 'required', 'exist' ].forEach(propName => {
-        describe('#' + propName, () => {
-            it('should validate', () => {
-                expect(any[propName]()({ a: 2 }, 'a')).to.be.equal(undefined);
-            });
+    describe('#disallow', () => {
+        it('should validate', () => {
+            expect(any.disallow(1)({ a: 2 }, 'a')).to.be.equal(undefined);
+            expect(any.disallow(1)({ a: 1 }, 'b')).to.be.equal(undefined);
+        });
 
-            it('should invalidate', () => {
-                expect(any[propName]()({ a: undefined }, 'a')).to.be.an('error');
-                expect(any[propName]()({ }, 'a')).to.be.an('error');
+        it('should validate for several arguments', () => {
+            expect(any.disallow(1, 2)({ a: 3 }, 'a')).to.be.equal(undefined);
+        });
+
+        it('should validate for array of arguments', () => {
+            expect(any.disallow([1, 2])({ a: 3 }, 'a')).to.be.equal(undefined);
+        });
+
+        it('should invalidate', () => {
+            expect(any.disallow(1)({ a: 1 }, 'a')).to.be.an('error');
+        });
+
+        it('should invalidate for 2+ arguments', () => {
+            expect(any.disallow([ 1, 2 ])({ a: 2 }, 'a')).to.be.an('error');
+        });
+
+        it('should have alliases', () => {
+            [ 'not', 'invalid' ].forEach(propName => {
+                expect(any[propName]).to.be.equal(any.disallow);
+            });
+        });
+    });
+
+    describe('#required', () => {
+        it('should validate', () => {
+            expect(any.required()({ a: 2 }, 'a')).to.be.equal(undefined);
+        });
+
+        it('should invalidate', () => {
+            expect(any.required()({ a: undefined }, 'a')).to.be.an('error');
+            expect(any.required()({ }, 'a')).to.be.an('error');
+        });
+
+        it('should have alliases', () => {
+            [ 'exist' ].forEach(propName => {
+                expect(any[propName]).to.be.equal(any.required);
             });
         });
     });
