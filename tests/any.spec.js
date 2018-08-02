@@ -87,4 +87,17 @@ describe('Validators :: Any', () => {
             });
         });
     });
+
+    [ 'required', 'exist' ].forEach(propName => {
+        describe('#' + propName, () => {
+            it('should validate', () => {
+                expect(any[propName]()({ a: 2 }, 'a')).to.be.equal(undefined);
+            });
+
+            it('should invalidate', () => {
+                expect(any[propName]()({ a: undefined }, 'a')).to.be.an('error');
+                expect(any[propName]()({ }, 'a')).to.be.an('error');
+            });
+        });
+    });
 });

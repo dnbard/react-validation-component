@@ -3,6 +3,7 @@ export default class AnyValidator{
         // alliases
         this.equals = this.equal = this.only = this.valid = this.allow;
         this.not = this.invalid = this.disallow;
+        this.exist = this.required;
     }
 
     _base(func){
@@ -33,6 +34,12 @@ export default class AnyValidator{
         return this._base(testValue => {
             const _values = this._prepareArguments(...args);
             return _values.indexOf(testValue) === -1;
+        });
+    }
+
+    required(){
+        return this._base(testValue => {
+            return testValue !== undefined;
         });
     }
 }
