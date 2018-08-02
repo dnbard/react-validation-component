@@ -1,6 +1,8 @@
-![react validation component logo](https://raw.githubusercontent.com/dnbard/react-validation-component/master/public/logo.png)
+![react validation component logo](https://raw.githubusercontent.com/dnbard/react-validation-component/master/public/logo.png)  
 
-**React Validation Component** is a utility component that solves data validation problem with the help of "native" React tool - `prop-types`.
+[![Build Status](https://travis-ci.org/dnbard/react-validation-component.svg?branch=master)](https://travis-ci.org/dnbard/react-validation-component)
+
+**React Validation Component** is an utility component that solves data validation problem with the help of "native" React tool - `prop-types`.
 
 # Basic Example
 
