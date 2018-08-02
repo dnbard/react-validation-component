@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import validators from '../src/validators';
 const { any } = validators;
 
-
 describe('Validators :: Any', () => {
     it('should be an object', () => {
         expect(any).to.be.an('object');

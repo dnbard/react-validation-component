@@ -6,6 +6,8 @@ export default class AnyValidator{
         this.exist = this.required;
     }
 
+    /* PRIVATE */
+
     _base(func){
         if (typeof func !== 'function'){
             throw new TypeError(`First argument should be a function instead of ${typeof func}`);
@@ -23,6 +25,9 @@ export default class AnyValidator{
         return Array.isArray(array[0]) ? array[0] : array;
     }
 
+
+    /* PUBLIC */
+
     allow(...args){
         return this._base(testValue => {
             const _values = this._prepareArguments(...args);
@@ -38,8 +43,6 @@ export default class AnyValidator{
     }
 
     required(){
-        return this._base(testValue => {
-            return testValue !== undefined;
-        });
+        return this._base(testValue => testValue !== undefined);
     }
 }
