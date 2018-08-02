@@ -18,7 +18,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "mocha tests/*.spec.js --require babel-core/register",
-    "coverage": "nyc mocha tests/*.spec.js --require babel-core/register",
+    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "eject": "react-scripts eject"
   },
   "main": "./src/lib/component.jsx"
