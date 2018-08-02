@@ -62,4 +62,29 @@ describe('Validators :: Any', () => {
             });
         }); 
     });
+
+    [ 'disallow', 'not', 'invalid' ].forEach(propName => {
+        describe('#' + propName, () => {
+            it('should validate', () => {
+                expect(any[propName](1)({ a: 2 }, 'a')).to.be.equal(undefined);
+                expect(any[propName](1)({ a: 1 }, 'b')).to.be.equal(undefined);
+            });
+
+            it('should validate for several arguments', () => {
+                expect(any[propName](1, 2)({ a: 3 }, 'a')).to.be.equal(undefined);
+            });
+    
+            it('should validate for array of arguments', () => {
+                expect(any[propName]([1, 2])({ a: 3 }, 'a')).to.be.equal(undefined);
+            });
+
+            it('should invalidate', () => {
+                expect(any[propName](1)({ a: 1 }, 'a')).to.be.an('error');
+            });
+
+            it('should invalidate for 2+ arguments', () => {
+                expect(any[propName]([ 1, 2 ])({ a: 2 }, 'a')).to.be.an('error');
+            });
+        });
+    });
 });
