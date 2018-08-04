@@ -111,4 +111,15 @@ describe('Validators :: Any', () => {
             });
         });
     });
+
+    describe('#forbidden', () => {
+        it('should validate', () => {
+            expect(any.forbidden()({ }, 'a')).to.be.equal(undefined);
+            expect(any.forbidden()({ a: undefined }, 'a')).to.be.equal(undefined);
+        });
+
+        it('should invalidate', () => {
+            expect(any.forbidden()({ a: 1 }, 'a')).to.be.an('error');
+        });
+    });
 });

@@ -45,4 +45,8 @@ export default class AnyValidator{
     required(){
         return this._base(testValue => testValue !== undefined);
     }
+
+    forbidden(){
+        return this._base(testValue => testValue === undefined);
+    }
 }
