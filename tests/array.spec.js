@@ -57,4 +57,24 @@ describe('Validators :: Array', () => {
             expect(array.allowType('string')({ a: [2 ,3] }, 'a')).to.be.an('error');
         });
     });
+
+    describe('#min', () => {
+        it('should validate', () => {
+            expect(array.min(5)({ a: [1, 2, 3, 4, 5] }, 'a')).to.be.equal(undefined);
+        });
+
+        it('should invalidate', () => {
+            expect(array.min(5)({ a: [1] }, 'a')).to.be.an('error');
+        });
+    });
+
+    describe('#max', () => {
+        it('should validate', () => {
+            expect(array.max(5)({ a: [1] }, 'a')).to.be.equal(undefined);
+        });
+
+        it('should invalidate', () => {
+            expect(array.max(2)({ a: [1, 3, 4] }, 'a')).to.be.an('error');
+        });
+    });
 });

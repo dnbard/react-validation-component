@@ -22,4 +22,12 @@ export default class ArrayValidator extends AnyValidator{
         const types = this._prepareArguments(...args);
         return this._base(testValue => testValue.filter(v => types.indexOf(typeof v) === -1).length === 0);
     }
+
+    min(value = 0){
+        return this._base(testValue => testValue.length >= value);
+    }
+
+    max(value = 0){
+        return this._base(testValue => testValue.length <= value);
+    }
 }
