@@ -42,5 +42,19 @@ describe('Validators :: Array', () => {
         it('should invalidate', () => {
             expect(array.allowTypes(['string'])({ a: [2 ,3] }, 'a')).to.be.an('error');
         });
-    })
+
+        it('should work with non-array arguments', () => {
+            expect(array.allowTypes('string')({ a: ['2' ,'3'] }, 'a')).to.be.equal(undefined);
+        })
+    });
+
+    describe('#allowType', () => {
+        it('should validate', () => {
+            expect(array.allowType('string')({ a: ['lalala'] }, 'a')).to.be.equal(undefined);
+        });
+
+        it('should invalidate', () => {
+            expect(array.allowType('string')({ a: [2 ,3] }, 'a')).to.be.an('error');
+        });
+    });
 });

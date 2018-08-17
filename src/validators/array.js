@@ -14,7 +14,12 @@ export default class ArrayValidator extends AnyValidator{
         return this._base(testValue => testValue.filter(v => v === undefined).length === 0);
     }
 
-    allowTypes(types=[]){
+    allowType(type){
+        return this._base(testValue => testValue.filter(v => typeof v !== type).length === 0);
+    }
+
+    allowTypes(...args){
+        const types = this._prepareArguments(...args);
         return this._base(testValue => testValue.filter(v => types.indexOf(typeof v) === -1).length === 0);
     }
 }
