@@ -4,6 +4,7 @@ export default class ArrayValidator extends AnyValidator{
     constructor(){
         super();
 
+        // testValue in validators are guaranteed to be an array
         this._addPreTest(testValue => Array.isArray(testValue));
     }
 
@@ -11,5 +12,9 @@ export default class ArrayValidator extends AnyValidator{
 
     denyUndefined(){
         return this._base(testValue => testValue.filter(v => v === undefined).length === 0);
+    }
+
+    allowTypes(types=[]){
+        return this._base(testValue => testValue.filter(v => types.indexOf(typeof v) === -1).length === 0);
     }
 }

@@ -22,7 +22,7 @@ export default class AnyValidator{
             for(let i in preTests){
                 result = preTests[i](props[propName]);
                 if (!result){
-                    return new Error(`Invalid prop \`${propName}\` supplied to \`${componentName}\`. Validation failed.`);
+                    return new Error(`Invalid prop \`${propName}\` supplied to \`${componentName}\`. Validation failed at pre-test.`);
                 }
             }
 

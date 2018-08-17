@@ -33,4 +33,14 @@ describe('Validators :: Array', () => {
             expect(array.denyUndefined()({ a: [1, 2, undefined] }, 'a')).to.be.an('error');
         });
     });
+
+    describe('#allowTypes', () => {
+        it('should validate', () => {
+            expect(array.allowTypes(['string'])({ a: ['lalala'] }, 'a')).to.be.equal(undefined);
+        });
+
+        it('should invalidate', () => {
+            expect(array.allowTypes(['string'])({ a: [2 ,3] }, 'a')).to.be.an('error');
+        });
+    })
 });
