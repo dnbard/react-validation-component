@@ -1,5 +1,4 @@
 import { expect } from 'chai';
-import PropTypes from 'prop-types';
 
 import validators from '../src/validators';
 const { any } = validators;
