@@ -77,4 +77,14 @@ describe('Validators :: Array', () => {
             expect(array.max(2)({ a: [1, 3, 4] }, 'a')).to.be.an('error');
         });
     });
+
+    describe('#length', () => {
+        it('should validate', () => {
+            expect(array.length(1)({ a: [1] }, 'a')).to.be.equal(undefined);
+        });
+
+        it('should invalidate', () => {
+            expect(array.length(2)({ a: [1, 3, 4] }, 'a')).to.be.an('error');
+        });
+    });
 });

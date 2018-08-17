@@ -30,4 +30,8 @@ export default class ArrayValidator extends AnyValidator{
     max(value = 0){
         return this._base(testValue => testValue.length <= value);
     }
+
+    length(value = 0){
+        return this._base(testValue => testValue.length === value);
+    }
 }
